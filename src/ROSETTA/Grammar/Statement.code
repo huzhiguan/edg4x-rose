@@ -1774,17 +1774,17 @@ HEADER_VARIABLE_DECLARATION_STATEMENT_START
           void setExternalAttribute();
           void unsetExternalAttribute();
 
-          bool testIntent_in_Attribute() const;
-          void setIntent_in_Attribute();
-          void unsetIntent_in_Attribute();
+          bool testIntent_to_Attribute() const;
+          void setIntent_to_Attribute();
+          void unsetIntent_to_Attribute();
 
-          bool testIntent_out_Attribute() const;
-          void setIntent_out_Attribute();
-          void unsetIntent_out_Attribute();
+          bool testIntent_from_Attribute() const;
+          void setIntent_from_Attribute();
+          void unsetIntent_from_Attribute();
 
-          bool testIntent_inout_Attribute() const;
-          void setIntent_inout_Attribute();
-          void unsetIntent_inout_Attribute();
+          bool testIntent_tofrom() const;
+          void setIntent_tofrom();
+          void unsetIntent_tofrom();
 
           bool testIntrinsicAttribute() const;
           void setIntrinsicAttribute();
@@ -11550,17 +11550,17 @@ bool testExternalAttribute() const;
 void setExternalAttribute();
 void unsetExternalAttribute();
 
-bool testIntent_in_Attribute() const;
-void setIntent_in_Attribute();
-void unsetIntent_in_Attribute();
+bool testIntent_to_Attribute() const;
+void setIntent_to_Attribute();
+void unsetIntent_to_Attribute();
 
-bool testIntent_out_Attribute() const;
-void setIntent_out_Attribute();
-void unsetIntent_out_Attribute();
+bool testIntent_from_Attribute() const;
+void setIntent_from_Attribute();
+void unsetIntent_from_Attribute();
 
-bool testIntent_inout_Attribute() const;
-void setIntent_inout_Attribute();
-void unsetIntent_inout_Attribute();
+bool testIntent_tofrom_Attribute() const;
+void setIntent_tofrom_Attribute();
+void unsetIntent_tofrom_Attribute();
 
 bool testIntrinsicAttribute() const;
 void setIntrinsicAttribute();

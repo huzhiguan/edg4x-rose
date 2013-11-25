@@ -2240,9 +2240,9 @@ std::map <SgVariableSymbol *, bool> collectVariableAppearance (SgNode* root)
 
     // store each time of map clause explicitly
     SgOmpMapClause* map_alloc_clause = NULL;
-    SgOmpMapClause* map_in_clause = NULL;
-    SgOmpMapClause* map_out_clause = NULL;
-    SgOmpMapClause* map_inout_clause = NULL;
+    SgOmpMapClause* map_to_clause = NULL;
+    SgOmpMapClause* map_from_clause = NULL;
+    SgOmpMapClause* map_tofrom = NULL;
     // dimension map is the same for all the map clauses under the same omp target directive
     std::map<SgSymbol*,  std::vector < std::pair <SgExpression*, SgExpression*> > >  array_dimensions; 
 
@@ -2266,12 +2266,12 @@ std::map <SgVariableSymbol *, bool> collectVariableAppearance (SgNode* root)
        SgOmpClause::omp_map_operator_enum map_operator = m_cls->get_operation();
        if (map_operator == SgOmpClause::e_omp_map_alloc)
          map_alloc_clause = m_cls;
-       else if (map_operator == SgOmpClause::e_omp_map_in)  
-         map_in_clause = m_cls;
-       else if (map_operator == SgOmpClause::e_omp_map_out)  
-         map_out_clause = m_cls;
-       else if (map_operator == SgOmpClause::e_omp_map_inout)  
-         map_inout_clause = m_cls;
+       else if (map_operator == SgOmpClause::e_omp_map_to)  
+         map_to_clause = m_cls;
+       else if (map_operator == SgOmpClause::e_omp_map_from)  
+         map_from_clause = m_cls;
+       else if (map_operator == SgOmpClause::e_omp_map_tofrom)  
+         map_tofrom = m_cls;
        else 
        {
          cerr<<"Error. transOmpMapVariables() from omp_lowering.cpp: found unacceptable map operator type:"<< map_operator <<endl;
@@ -2394,8 +2394,8 @@ std::map <SgVariableSymbol *, bool> collectVariableAppearance (SgNode* root)
      // e.g. xomp_memcpyHostToDevice ((void*)dev_m1, (const void*)a, array_size);
      if (need_generate_data_stmt)
      {
-       if ( ((map_in_clause) && (isInClauseVariableList (map_in_clause,sym))) || 
-           ((map_inout_clause) && (isInClauseVariableList (map_inout_clause,sym))) )
+       if ( ((map_to_clause) && (isInClauseVariableList (map_to_clause,sym))) || 
+           ((map_tofrom) && (isInClauseVariableList (map_tofrom,sym))) )
        {
          SgExprListExp * parameters = buildExprListExp (
              buildCastExp(buildVarRefExp(dev_var_name, insertion_scope), buildPointerType(buildVoidType())),
@@ -2416,8 +2416,8 @@ std::map <SgVariableSymbol *, bool> collectVariableAppearance (SgNode* root)
      if (need_generate_data_stmt)
      {
        // SgStatement* prev_stmt = target_parallel_stmt;
-       if (( (map_out_clause) && (isInClauseVariableList (map_out_clause,sym))) ||
-           ( (map_inout_clause) && (isInClauseVariableList (map_inout_clause,sym))))
+       if (( (map_from_clause) && (isInClauseVariableList (map_from_clause,sym))) ||
+           ( (map_tofrom) && (isInClauseVariableList (map_tofrom,sym))))
        {
          SgExprListExp * parameters = buildExprListExp (
              buildCastExp(buildVarRefExp(orig_name, insertion_scope), buildPointerType(buildVoidType()) ),
@@ -4775,7 +4775,7 @@ void transOmpCollapse(SgOmpClauseBodyStatement * node)
     {
 
         Rose_STL_Container<SgOmpClause*> map_clauses;
-        SgOmpMapClause * map_in;
+        SgOmpMapClause * map_to;
 
         /*get the data clause of this target statement*/
         SgOmpClauseBodyStatement * target_clause_body = isSgOmpClauseBodyStatement(target_stmt); 
@@ -4797,21 +4797,21 @@ void transOmpCollapse(SgOmpClauseBodyStatement * node)
              if(temp_map_clause != NULL) //Winnie, look for the map(in) or map(inout) clause
              {
                  SgOmpClause::omp_map_operator_enum map_operator = temp_map_clause->get_operation();
-                 if(map_operator == SgOmpClause::e_omp_map_in || map_operator == SgOmpClause::e_omp_map_inout)
+                 if(map_operator == SgOmpClause::e_omp_map_to || map_operator == SgOmpClause::e_omp_map_tofrom)
                  {
-                     map_in = temp_map_clause;
+                     map_to = temp_map_clause;
                      break;
                  }
              }
         }
         
-        if(map_in == NULL)
+        if(map_to == NULL)
         {
-            cerr <<"prepare to create a map in clause" << endl;
+            cerr <<"prepare to create a map to clause" << endl;
         }
         
         
-        SgVarRefExpPtrList & mapin_var_list = map_in->get_variables();
+        SgVarRefExpPtrList & mapin_var_list = map_to->get_variables();
         SgExpressionPtrList new_vars = new_var_list->get_expressions();
         for(int i = 0; i < new_vars.size(); i++)
         {

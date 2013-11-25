@@ -87,9 +87,9 @@ HEADER_OMP_CLAUSE_START
         {
           e_omp_map_unknown,
           e_omp_map_alloc,
-          e_omp_map_in,
-          e_omp_map_out,
-          e_omp_map_inout,
+          e_omp_map_to,
+          e_omp_map_from,
+          e_omp_map_tofrom,
           e_omp_map_last,
         };
 
@@ -1190,9 +1190,9 @@ HEADER_TYPE_MODIFIER_START
                e_dimension      = 7, /*!< dimension attribute specifier (for Fortran 77) */
             // This should map to the C/C++ extern modifier in SgStorageModifier
             // e_external       = x, /*!< external attribute specifier (for Fortran 77, this is less related to the SgLinkageModifier than the SgStorageModifier) */
-               e_intent_in      = 8, /*!< intent(in) attribute specifier (for Fortran 90) */
-               e_intent_out     = 9, /*!< intent(out) attribute specifier (for Fortran 90) */
-               e_intent_inout   = 10,/*!< intent(inout) attribute specifier (for Fortran 90) */
+               e_intent_to      = 8, /*!< intent(to) attribute specifier (for Fortran 90) */
+               e_intent_from     = 9, /*!< intent(from) attribute specifier (for Fortran 90) */
+               e_intent_tofrom   = 10,/*!< intent(tofrom) attribute specifier (for Fortran 90) */
                e_intrinsic      = 11,/*!< intrinsic attribute specifier (for Fortran 90) */
                e_optional       = 12,/*!< optional attribute specifier (for Fortran 90) */
 
@@ -1368,19 +1368,19 @@ HEADER_TYPE_MODIFIER_START
           void unsetDimension();
 
        // Fortran specific attribute
-          bool isIntent_in() const;
-          void setIntent_in();
-          void unsetIntent_in();
+          bool isIntent_to() const;
+          void setIntent_to();
+          void unsetIntent_to();
 
        // Fortran specific attribute
-          bool isIntent_out() const;
-          void setIntent_out();
-          void unsetIntent_out();
+          bool isIntent_from() const;
+          void setIntent_from();
+          void unsetIntent_from();
 
        // Fortran specific attribute
-          bool isIntent_inout() const;
-          void setIntent_inout();
-          void unsetIntent_inout();
+          bool isIntent_tofrom() const;
+          void setIntent_tofrom();
+          void unsetIntent_tofrom();
 
        // Fortran specific attribute
           bool isIntrinsic() const;
@@ -3064,9 +3064,9 @@ void SgTypeModifier::unsetRestrict()    { unsetBit(e_restrict,p_modifierVector);
                e_dimension      = 7, /*!< dimension attribute specifier (for Fortran 77) */
             // This should map to the C/C++ extern modifier in SgStorageModifier
             // e_external       = x, /*!< external attribute specifier (for Fortran 77, this is less related to the SgLinkageModifier than the SgStorageModifier) */
-               e_intent_in      = 8, /*!< intent(in) attribute specifier (for Fortran 90) */
-               e_intent_out     = 9, /*!< intent(out) attribute specifier (for Fortran 90) */
-               e_intent_inout   = 10,/*!< intent(inout) attribute specifier (for Fortran 90) */
+               e_intent_to      = 8, /*!< intent(to) attribute specifier (for Fortran 90) */
+               e_intent_from     = 9, /*!< intent(from) attribute specifier (for Fortran 90) */
+               e_intent_tofrom   = 10,/*!< intent(tofrom) attribute specifier (for Fortran 90) */
                e_intrinsic      = 11,/*!< intrinsic attribute specifier (for Fortran 90) */
                e_optional       = 12,/*!< optional attribute specifier (for Fortran 90) */
             // This should map to const in the SgConstVolatileModifier
@@ -3107,19 +3107,19 @@ void SgTypeModifier::setDimension()       { setBit(e_dimension,p_modifierVector)
 void SgTypeModifier::unsetDimension()     { unsetBit(e_dimension,p_modifierVector); }
 
 // Fortran specific attribute
-bool SgTypeModifier::isIntent_in() const  { return checkBit(e_intent_in,p_modifierVector); }
-void SgTypeModifier::setIntent_in()       { setBit(e_intent_in,p_modifierVector); }
-void SgTypeModifier::unsetIntent_in()     { unsetBit(e_intent_in,p_modifierVector); }
+bool SgTypeModifier::isIntent_to() const  { return checkBit(e_intent_to,p_modifierVector); }
+void SgTypeModifier::setIntent_to()       { setBit(e_intent_to,p_modifierVector); }
+void SgTypeModifier::unsetIntent_to()     { unsetBit(e_intent_to,p_modifierVector); }
 
 // Fortran specific attribute
-bool SgTypeModifier::isIntent_out() const  { return checkBit(e_intent_out,p_modifierVector); }
-void SgTypeModifier::setIntent_out()       { setBit(e_intent_out,p_modifierVector); }
-void SgTypeModifier::unsetIntent_out()     { unsetBit(e_intent_out,p_modifierVector); }
+bool SgTypeModifier::isIntent_from() const  { return checkBit(e_intent_from,p_modifierVector); }
+void SgTypeModifier::setIntent_from()       { setBit(e_intent_from,p_modifierVector); }
+void SgTypeModifier::unsetIntent_from()     { unsetBit(e_intent_from,p_modifierVector); }
 
 // Fortran specific attribute
-bool SgTypeModifier::isIntent_inout() const  { return checkBit(e_intent_inout,p_modifierVector); }
-void SgTypeModifier::setIntent_inout()       { setBit(e_intent_inout,p_modifierVector); }
-void SgTypeModifier::unsetIntent_inout()     { unsetBit(e_intent_inout,p_modifierVector); }
+bool SgTypeModifier::isIntent_tofrom() const  { return checkBit(e_intent_tofrom,p_modifierVector); }
+void SgTypeModifier::setIntent_tofrom()       { setBit(e_intent_tofrom,p_modifierVector); }
+void SgTypeModifier::unsetIntent_tofrom()     { unsetBit(e_intent_tofrom,p_modifierVector); }
 
 // Fortran specific attribute
 bool SgTypeModifier::isIntrinsic() const  { return checkBit(e_intrinsic,p_modifierVector); }
@@ -3285,9 +3285,9 @@ bool operator== (const $CLASSNAME& lhs, const $CLASSNAME& rhs)
 	       (lhs.isAsynchronous() == rhs.isAsynchronous()) &&
 	       (lhs.isData()         == rhs.isData()        ) &&
 	       (lhs.isDimension()    == rhs.isDimension()   ) &&
-	       (lhs.isIntent_in()    == rhs.isIntent_in()   ) &&
-	       (lhs.isIntent_out()   == rhs.isIntent_out()  ) &&
-	       (lhs.isIntent_inout() == rhs.isIntent_inout()) &&
+	       (lhs.isIntent_to()    == rhs.isIntent_to()   ) &&
+	       (lhs.isIntent_from()   == rhs.isIntent_from()  ) &&
+	       (lhs.isIntent_tofrom() == rhs.isIntent_tofrom()) &&
 	       (lhs.isIntrinsic()    == rhs.isIntrinsic()   ) &&
 	       (lhs.isOptional()     == rhs.isOptional()    ) &&
 	       (lhs.isSave()         == rhs.isSave()        ) &&
