@@ -1,0 +1,1 @@
+../edg4x-rose/configure  --disable-projects-directory --disable-tests-directory --with-gomp_omp_runtime_library=/opt/local/gcc/4.4.6/lib64 --with-boost=/home/guanguan/ROSE/boost/boost_1_44_0/installTree

@@ -22,56 +22,56 @@
         interface
           subroutine omp_init_lock (lock)
             use omp_lib_kinds
-            integer (omp_lock_kind), intent (out) :: lock
+            integer (omp_lock_kind), intent (from) :: lock
           end subroutine omp_init_lock
         end interface
 
         interface
           subroutine omp_init_nest_lock (lock)
             use omp_lib_kinds
-            integer (omp_nest_lock_kind), intent (out) :: lock
+            integer (omp_nest_lock_kind), intent (from) :: lock
           end subroutine omp_init_nest_lock
         end interface
 
         interface
           subroutine omp_destroy_lock (lock)
             use omp_lib_kinds
-            integer (omp_lock_kind), intent (inout) :: lock
+            integer (omp_lock_kind), intent (tofrom) :: lock
           end subroutine omp_destroy_lock
         end interface
 
         interface
           subroutine omp_destroy_nest_lock (lock)
             use omp_lib_kinds
-            integer (omp_nest_lock_kind), intent (inout) :: lock
+            integer (omp_nest_lock_kind), intent (tofrom) :: lock
           end subroutine omp_destroy_nest_lock
         end interface
 
         interface
           subroutine omp_set_lock (lock)
             use omp_lib_kinds
-            integer (omp_lock_kind), intent (inout) :: lock
+            integer (omp_lock_kind), intent (tofrom) :: lock
           end subroutine omp_set_lock
         end interface
 
         interface
           subroutine omp_set_nest_lock (lock)
             use omp_lib_kinds
-            integer (omp_nest_lock_kind), intent (inout) :: lock
+            integer (omp_nest_lock_kind), intent (tofrom) :: lock
           end subroutine omp_set_nest_lock
         end interface
 
         interface
           subroutine omp_unset_lock (lock)
             use omp_lib_kinds
-            integer (omp_lock_kind), intent (inout) :: lock
+            integer (omp_lock_kind), intent (tofrom) :: lock
           end subroutine omp_unset_lock
         end interface
 
         interface
           subroutine omp_unset_nest_lock (lock)
             use omp_lib_kinds
-            integer (omp_nest_lock_kind), intent (inout) :: lock
+            integer (omp_nest_lock_kind), intent (tofrom) :: lock
           end subroutine omp_unset_nest_lock
         end interface
 
@@ -79,7 +79,7 @@
           function omp_test_lock (lock)
             use omp_lib_kinds
             logical (omp_logical_kind) :: omp_test_lock
-            integer (omp_lock_kind), intent (inout) :: lock
+            integer (omp_lock_kind), intent (tofrom) :: lock
           end function omp_test_lock
         end interface
 
@@ -87,7 +87,7 @@
           function omp_test_nest_lock (lock)
             use omp_lib_kinds
             integer (omp_integer_kind) :: omp_test_nest_lock
-            integer (omp_nest_lock_kind), intent (inout) :: lock
+            integer (omp_nest_lock_kind), intent (tofrom) :: lock
           end function omp_test_nest_lock
         end interface
 
@@ -95,7 +95,7 @@
           function omp_test_nest_lock (lock)
             use omp_lib_kinds
             integer (omp_integer_kind) :: omp_test_nest_lock
-            integer (omp_nest_lock_kind), intent (inout) :: lock
+            integer (omp_nest_lock_kind), intent (tofrom) :: lock
           end function omp_test_nest_lock
         end interface
 

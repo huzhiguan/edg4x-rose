@@ -4217,9 +4217,9 @@ setDeclarationAttributeSpec ( SgDeclarationStatement* variableDeclaration, int a
                ROSE_ASSERT(astIntentSpecStack.empty() == false);
                switch(astIntentSpecStack.front())
                   {
-                    case IntentSpec_IN:    variableDeclaration->get_declarationModifier().get_typeModifier().setIntent_in();    break;
-                    case IntentSpec_OUT:   variableDeclaration->get_declarationModifier().get_typeModifier().setIntent_out();   break;
-                    case IntentSpec_INOUT: variableDeclaration->get_declarationModifier().get_typeModifier().setIntent_inout(); break;
+                    case IntentSpec_IN:    variableDeclaration->get_declarationModifier().get_typeModifier().setIntent_to();    break;
+                    case IntentSpec_OUT:   variableDeclaration->get_declarationModifier().get_typeModifier().setIntent_from();   break;
+                    case IntentSpec_INOUT: variableDeclaration->get_declarationModifier().get_typeModifier().setIntent_tofrom(); break;
                     default:
                        {
                          printf ("Error: default reached in switch(astIntentSpecStack.front()) astIntentSpecStack.front() = %d \n",astIntentSpecStack.front());

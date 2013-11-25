@@ -204,7 +204,7 @@ void AttributeRec::setHasIntent(bool hasInt) { hasIntent = hasInt; }
 int AttributeRec::getIntentAttr() { return intentAttr; }
 void AttributeRec::setIntentAttr(int attr) { intentAttr = attr;}
 int AttributeRec::getIntent() { return intent; }
-void AttributeRec::setIntent(int inout) { intent = inout; }
+void AttributeRec::setIntent(int tofrom) { intent = tofrom; }
 bool AttributeRec::getIsIntrinsic() { return isIntrinsic; }
 void AttributeRec::setIsIntrinsic(bool isIntrin) { isIntrinsic = isIntrin; }
 int AttributeRec::getIntrinsicAttr() { return intrinsicAttr; }

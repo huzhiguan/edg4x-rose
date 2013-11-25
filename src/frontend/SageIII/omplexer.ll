@@ -113,9 +113,9 @@ update          {return cond_return ( UPDATE ); }
 map             {return cond_return ( MAP ); }
 device          {return cond_return ( DEVICE ); }
 alloc           {return cond_return ( ALLOC ); }
-in              {return cond_return ( IN ); }
-out             {return cond_return ( OUT ); }
-inout           {return cond_return ( INOUT ); }
+to              {return cond_return ( TO ); }
+from             {return cond_return ( FROM ); }
+tofrom           {return cond_return ( TOFROM ); }
 simd            {return cond_return ( SIMD ); }
 safelen         {return cond_return ( SAFELEN ); }
 aligned         {return cond_return ( ALIGNED ); }

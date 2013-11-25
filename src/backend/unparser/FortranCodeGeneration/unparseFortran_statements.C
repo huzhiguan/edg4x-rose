@@ -942,16 +942,16 @@ FortranCodeGeneration_locatedNode::unparseAttributeSpecificationStatement(SgStat
 #define IntentSpecBase 600
 #ifndef _MSC_VER
                         // tps (02/02/2010) : error C2513: 'const int' : no variable declared before '='
-          const int IN    = IntentSpecBase+0;
-          const int OUT   = IntentSpecBase+1;
-          const int INOUT = IntentSpecBase+2;
+          const int TO    = IntentSpecBase+0;
+          const int FROM   = IntentSpecBase+1;
+          const int TOFROM = IntentSpecBase+2;
 
           string intentString;
           switch(attributeSpecificationStatement->get_intent())
              {
-               case IN:    intentString = "in";    break;
-               case OUT:   intentString = "out";   break;
-               case INOUT: intentString = "inout"; break;
+               case TO:    intentString = "to";    break;
+               case FROM:   intentString = "from";   break;
+               case TOFROM: intentString = "tofrom"; break;
 
                default:
                   {
@@ -3827,21 +3827,21 @@ FortranCodeGeneration_locatedNode::unparseVarDecl(SgStatement* stmt, SgInitializ
 
        // Need to handle INTENT better
        // printf ("variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_in() = %s \n",variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_in() ? "true" : "false");
-          if (variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_in() == true)
+          if (variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_to() == true)
              {
-               curprint(", INTENT(IN)");
+               curprint(", INTENT(TO)");
              }
 
        // printf ("variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_out() = %s \n",variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_out() ? "true" : "false");
-          if (variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_out() == true)
+          if (variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_from() == true)
              {
-               curprint(", INTENT(OUT)");
+               curprint(", INTENT(FROM)");
              }
 
        // printf ("variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_inout() = %s \n",variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_inout() ? "true" : "false");
-          if (variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_inout() == true)
+          if (variableDeclaration->get_declarationModifier().get_typeModifier().isIntent_tofrom() == true)
              {
-               curprint(", INTENT(INOUT)");
+               curprint(", INTENT(TOFROM)");
              }
 
        // printf ("variableDeclaration->get_declarationModifier().get_typeModifier().get_constVolatileModifier().isVolatile() = %s \n",variableDeclaration->get_declarationModifier().get_typeModifier().get_constVolatileModifier().isVolatile() ? "true" : "false");

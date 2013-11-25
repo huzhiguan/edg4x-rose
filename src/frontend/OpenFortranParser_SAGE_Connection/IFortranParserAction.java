@@ -1122,7 +1122,7 @@ public abstract interface IFortranParserAction {
 
    /** R517
     * intent_spec
-    *   :   T_IN | T_OUT | T_IN T_OUT | T_INOUT
+    *   :   T_TO | T_FROM | T_TO T_FROM | T_TOFROM
     *
     * @param intentKeyword1 The first of two possible intent keyword tokens
     * (e.g., T_IN, T_OUT, T_INOUT).

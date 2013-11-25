@@ -146,7 +146,7 @@ public:
     int getIntentAttr();
     void setIntentAttr(int attr);
     int getIntent() ;
-    void setIntent(int inout);
+    void setIntent(int tofrom);
     bool getIsIntrinsic();
     void setIsIntrinsic(bool isIntrin) ;
     int getIntrinsicAttr() ;

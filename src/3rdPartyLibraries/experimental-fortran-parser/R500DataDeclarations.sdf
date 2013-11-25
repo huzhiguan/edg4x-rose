@@ -249,9 +249,9 @@ context-free syntax
   {ImpliedShapeSpec ','}+                       -> ImpliedShapeSpecList {cons("ImpliedShapeSpecList")}
 
 %%R523
-  'IN'                                          -> IntentSpec  {cons("IntentSpec_IN")}
-  'OUT'                                         -> IntentSpec  {cons("IntentSpec_OUT")}
-  'IN' 'OUT'                                    -> IntentSpec  {cons("IntentSpec_INOUT")}
+  'TO'                                          -> IntentSpec  {cons("IntentSpec_IN")}
+  'FROM'                                         -> IntentSpec  {cons("IntentSpec_OUT")}
+  'TO' 'FROM'                                    -> IntentSpec  {cons("IntentSpec_INOUT")}
 
 
 %% 5.4 Attribute specification statements
